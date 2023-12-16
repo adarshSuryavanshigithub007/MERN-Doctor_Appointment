@@ -1,10 +1,26 @@
 import React from 'react'
-import { Form, Input } from 'antd';
+import { Form, Input, message } from 'antd';
 import '../style/RegisterStyles.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { getLogin } from '../service/apis';
 const Login = () => {
-    const onFinishHandler = (values) => {
+    const navigate = useNavigate()
+    const onFinishHandler = async (values) => {
         console.log(values)
+        try {
+            const res = await getLogin(values)
+            console.log(res)
+            if (res.data.success) {
+                navigate('/')
+                localStorage.setItem("token", res.data.token)
+                message.success(res.data.message)
+            } else {
+                message.error(res.data.message)
+            }
+        } catch (error) {
+            console.log(error)
+            message.error(`something went wrong ${error.message}`)
+        }
     }
     return (
         <div className='form-container'>
