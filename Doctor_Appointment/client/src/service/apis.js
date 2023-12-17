@@ -13,10 +13,26 @@ export const getRegister = async (data) => {
     }
 }
 
-export const getLogin = async(data)=>{
+export const getLogin = async (data) => {
     try {
-        const res = await axios.post(`${url}/login`,data)
+        const res = await axios.post(`${url}/login`, data)
         return res
+    } catch (error) {
+        console.log(message.error)
+        message.error(`something went wrong`)
+    }
+}
+
+export const getUserData = async (token) => {
+    try {
+        
+        const response = await axios.post(`${url}/getUserData`, {}, {
+            headers: {
+                Authorization: "Bearer " + token
+            }
+        })
+        console.log(response.data);
+        return response.data;
     } catch (error) {
         console.log(message.error)
         message.error(`something went wrong`)
