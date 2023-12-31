@@ -3,12 +3,17 @@ import { Form, Input, message } from 'antd';
 import '../style/RegisterStyles.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { getLogin } from '../service/apis';
+import {useDispatch} from 'react-redux'
+import { showLoading,hideLoading } from '../redux/feature/alertSlice';
 const Login = () => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const onFinishHandler = async (values) => {
         console.log(values)
         try {
+            dispatch(showLoading())
             const res = await getLogin(values)
+            dispatch(hideLoading())
             console.log(res)
             if (res.data.success) {
                 navigate('/')
@@ -18,6 +23,7 @@ const Login = () => {
                 message.error(res.data.message)
             }
         } catch (error) {
+            dispatch(hideLoading())
             console.log(error)
             message.error(`something went wrong ${error.message}`)
         }

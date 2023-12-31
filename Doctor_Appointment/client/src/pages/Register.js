@@ -4,11 +4,16 @@ import '../style/RegisterStyles.css'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { getRegister } from '../service/apis';
+import {useDispatch} from 'react-redux'
+import { showLoading,hideLoading } from '../redux/feature/alertSlice';
 const Register = () => {
+  const dispatch = useDispatch()
   const onFinishHandler = async (values) => {
     console.log(values)
     try {
+      dispatch(showLoading())
       const res = await getRegister(values)
+      dispatch(hideLoading())
       console.log(res)
       if (res.data.success) {
         message.success(res.data.message)
@@ -17,6 +22,7 @@ const Register = () => {
     }
 
     } catch (error) {
+      dispatch(hideLoading())
       console.log(error)
       message.error(`something went wrong ${error.message}`)
     }
