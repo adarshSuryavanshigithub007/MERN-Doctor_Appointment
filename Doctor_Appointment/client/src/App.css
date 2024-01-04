@@ -14,6 +14,19 @@
     background-color: #002D62;
     box-shadow: 0 0 2px gray;
     margin-right: 10px;
+    color: #ffff;
+    transition: width 0.3s ease;
+    /* Adding transition for smooth sidebar collapse/expand */
+}
+
+.collapsed .sidebar {
+    width: 80px;
+    /* Collapsed width */
+    overflow: hidden;
+}
+
+.collapsed .menu-item a {
+    display: none;
 }
 
 .content {
@@ -26,12 +39,42 @@
     margin-bottom: 20px;
     box-shadow: 0px 0px 20px rgba(227, 227, 227, 0.383);
 }
+
 .body {
     height: 80vh;
     margin-bottom: 20px;
     box-shadow: 0px 0px 20px rgba(227, 227, 227, 0.383);
 }
-.logo{
-    text-align: center;
+
+.logo {
+    text-align: left;
     padding: 10px 0px;
+}
+
+.menu {
+    margin-top: 50px;
+}
+
+.menu-item {
+    margin-top: 30px;
+}
+
+.menu-item a {
+    text-decoration: none;
+    color: #ffff;
+    font-size: 1.2rem;
+}
+
+.menu-item i {
+    font-size: 1.2rem;
+    margin: 0 15px;
+}
+
+.active {
+    background-color: #ffff;
+    color: #002D62;
+}
+
+.active a {
+    color: #002D62;
 }
