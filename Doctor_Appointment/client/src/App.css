@@ -78,3 +78,41 @@
 .active a {
     color: #002D62;
 }
+.main-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.custom-icon {
+    font-size: 21px; 
+  }
+.bell{
+    display: flex;
+    align-items:baseline    ;
+}
+.sidebar-logo{
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+}
+.collapsed .logo{
+    display: none;
+}
+.header-content{
+    margin: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 50px;
+
+}
+.header-content i{
+    margin-right: 20px;
+    font-size: 1.2rem;
+}
+.header-content a{
+    text-decoration: none;
+    color: #0077ff;
+    margin: 0 10px;
+    text-transform: uppercase;
+}
