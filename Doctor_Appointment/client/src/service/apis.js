@@ -28,7 +28,7 @@ export const getUserData = async (token) => {
         
         const response = await axios.post(`${url}/getUserData`, {}, {
             headers: {
-                Authorization: "Bearer " + token
+                Authorization: `Bearer ${token}`
             }
         })
         console.log(response.data);

@@ -1,1 +1,1 @@
-export {default as doctor} from '../images/doctor.jpg'
+export {default as doctor} from '../images/doctor.png'

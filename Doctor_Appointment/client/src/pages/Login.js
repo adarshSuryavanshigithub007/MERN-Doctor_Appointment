@@ -3,8 +3,8 @@ import { Form, Input, message } from 'antd';
 import '../style/RegisterStyles.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { getLogin } from '../service/apis';
-import {useDispatch} from 'react-redux'
-import { showLoading,hideLoading } from '../redux/feature/alertSlice';
+import { useDispatch } from 'react-redux'
+import { showLoading, hideLoading } from '../redux/feature/alertSlice';
 const Login = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -13,6 +13,7 @@ const Login = () => {
         try {
             dispatch(showLoading())
             const res = await getLogin(values)
+            window.location.reload()
             dispatch(hideLoading())
             console.log(res)
             if (res.data.success) {
@@ -38,7 +39,7 @@ const Login = () => {
                 <Form.Item label="Password" name="password" rules={[{ required: true, message: 'Please input your password!', },]}>
                     <Input type="password" required />
                 </Form.Item>
-                <Link to='/login'>Already user Login here</Link>
+                <Link to='/register'>Already  Register here</Link>
                 <button className='btn btn-primary' type='submit'>
                     Submit
                 </button>
