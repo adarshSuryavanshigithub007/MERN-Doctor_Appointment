@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { hideLoading, showLoading } from '../redux/feature/alertSlice'
 import axios from 'axios'
 import { getUserData } from '../service/apis'
@@ -8,6 +8,7 @@ import { setUser } from '../redux/feature/userSlice'
 
 export default function ProtectedRoute({ children }) {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const { user } = useSelector(state => state.user)
     console.log(user)
     const token = localStorage.getItem('token')
@@ -19,7 +20,8 @@ export default function ProtectedRoute({ children }) {
             if (response.success) {
                 dispatch(setUser(response.data))
             } else {
-                <Navigate to="/login" />
+                navigate('/login')
+                // <Navigate to="/login" />
                 localStorage.clear()
             }
         } catch (error) {
@@ -36,7 +38,8 @@ export default function ProtectedRoute({ children }) {
     if (token) {
         return children
     } else {
-        <Navigate to="/login" />
+        // <Navigate to="/login" />
+        navigate('/login')
     }
 
 }

@@ -33,7 +33,7 @@ const Login = () => {
         <div className='form-container'>
             <Form name="basic" layout='vertical' onFinish={onFinishHandler} className='register-form card'>
                 <h1>Login Form</h1>
-                <Form.Item label="email" name="email" rules={[{ required: true, message: 'Please input your name!', },]}>
+                <Form.Item label="email" name="email" rules={[{ required: true, message: 'Please input your Email!', },]}>
                     <Input type='email' required />
                 </Form.Item>
                 <Form.Item label="Password" name="password" rules={[{ required: true, message: 'Please input your password!', },]}>

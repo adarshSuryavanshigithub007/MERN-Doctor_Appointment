@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { doctor } from '../images/Images'
 import { Avatar, Button, message } from 'antd'
 import { adminMenu, userMenu } from './data'
@@ -8,16 +8,38 @@ const Layout = ({ children }) => {
     const [collapsed, setCollapsed] = useState(false);
     const location = useLocation()
     const navigate = useNavigate()
+    const [pageTitle, setPageTitle] = useState('Doctor-Appointment')
+   
+    useEffect(() => {
+        // Update the page title whenever the location changes
+        const pathname = location.pathname;
+        const newTitle = getPageTitle(pathname);
+        setPageTitle(newTitle);
+    }, [location]);
+
     const { user } = useSelector(state => state.user)
     console.log(user)
     const SidebarMenu = user?.isAdmin ? adminMenu : userMenu
-
+    console.log(SidebarMenu)
     const handleLogout = () => {
         localStorage.clear()
         message.success('logout successful')
         navigate('/login')
 
     }
+    function getPageTitle(pathname) {
+        switch (pathname) {
+            case '/':
+                return
+            case '/apply-doctor':
+                return <h1 className='text-center'>Apply Doctor</h1>
+
+            default:
+                return;
+        }
+    }
+
+
     return (
         <div className={`main ${collapsed ? 'collapsed' : ''}`}>
             <div className='layout'>
@@ -34,13 +56,10 @@ const Layout = ({ children }) => {
                                 height: 30,
                             }}
                         />
-
                         <div className='logo'>
                             <Avatar size={55} src={doctor} />
                         </div>
                     </div>
-
-
                     <div className='menu'>
                         {SidebarMenu.map(menu => {
                             const isActive = location.pathname === menu.path
@@ -48,7 +67,7 @@ const Layout = ({ children }) => {
                                 <>
                                     <div className={`menu-item ${isActive && "active"}`}>
                                         <i className={menu.icon}></i>
-                                        <Link Link={menu.path}>{menu.name}</Link>
+                                        <Link to={menu.path}>{menu.name}</Link>
                                     </div>
                                 </>
                             )
@@ -61,14 +80,14 @@ const Layout = ({ children }) => {
                 </div>
                 <div className='content'>
                     <div className='header'>
+                        <h1 className='textcenter'>{pageTitle}</h1>
                         <div className='header-content'>
-
-                            <i class="fa-solid fa-bell custom-icon"></i>
-                            <Link to='/profile'> {user?.name}</Link>
+                            <i className="fa-solid fa-bell custom-icon"></i>
+                            <Link to='/profile'>{user?.name}</Link>
                         </div>
                     </div>
                     <div className='body'>
-                        <div className='body'>{children}</div>
+                        <div className='body-content'>{children}</div>
                     </div>
                 </div>
             </div>
