@@ -9,7 +9,7 @@
 
 .sidebar {
     min-height: 100%;
-    width: 300px;
+    width: 250px;
     border-radius: 5px;
     background-color: #002D62;
     box-shadow: 0 0 2px gray;
@@ -20,7 +20,7 @@
 }
 
 .collapsed .sidebar {
-    width: 80px;
+    width: 60px;
     /* Collapsed width */
     overflow: hidden;
 }
@@ -78,27 +78,33 @@
 .active a {
     color: #002D62;
 }
-.main-header{
+
+.main-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 .custom-icon {
-    font-size: 21px; 
-  }
-.bell{
-    display: flex;
-    align-items:baseline    ;
+    font-size: 21px;
 }
-.sidebar-logo{
+
+.bell {
+    display: flex;
+    align-items: baseline;
+}
+
+.sidebar-logo {
     display: flex;
     justify-content: space-between;
     overflow: hidden;
 }
-.collapsed .logo{
+
+.collapsed .logo {
     display: none;
 }
-.header-content{
+
+.header-content {
     margin: 0 15px;
     display: flex;
     align-items: center;
@@ -106,11 +112,34 @@
     height: 50px;
 
 }
-.header-content i{
+
+.content {
+    display: flex;
+    flex-direction: column;
+    /* Add other necessary styles */
+}
+
+.textcenter{
+    margin: 0 auto;
+    color: #002D62;
+    font-weight: bolder;
+    /* This will center the h1 element */
+    /* Add other necessary styles */
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Add other necessary styles */
+}
+
+.header-content i {
     margin-right: 20px;
     font-size: 1.2rem;
 }
-.header-content a{
+
+.header-content a {
     text-decoration: none;
     color: #0077ff;
     margin: 0 10px;
