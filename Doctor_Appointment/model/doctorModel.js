@@ -1,4 +1,4 @@
-const mongoose = required('mongoose')
+const mongoose = require('mongoose')
 
 const doctorSchema = new mongoose.Schema({
     firstName: {
@@ -36,12 +36,16 @@ const doctorSchema = new mongoose.Schema({
         type: Number,
         required: [true, 'Fee is required']
     },
-    timings:{
-        type:Object,
-        require:[true,'Work timing is required']
+    status: {
+        type: String,
+        default: 'pending'
+    },
+    timings: {
+        type: Object,
+        require: [true, 'Work timing is required']
     }
 
-},{timeStamps:true})
+}, { timeStamps: true })
 
-const doctorModel = mongoose.model('users', doctorSchema)
+const doctorModel = mongoose.model('doctors', doctorSchema)
 module.exports = doctorModel
