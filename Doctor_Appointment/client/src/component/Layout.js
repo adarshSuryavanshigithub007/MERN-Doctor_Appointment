@@ -1,24 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { doctor } from '../images/Images'
-import { Avatar, Button, message } from 'antd'
+import { Avatar, Badge, Button, message } from 'antd'
 import { adminMenu, userMenu } from './data'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 const Layout = ({ children }) => {
+    const { user } = useSelector(state => state.user || {})
+    console.log(user?.notification.length)
     const [collapsed, setCollapsed] = useState(false);
     const location = useLocation()
     const navigate = useNavigate()
     const [pageTitle, setPageTitle] = useState('Doctor-Appointment')
-   
+
     useEffect(() => {
         // Update the page title whenever the location changes
         const pathname = location.pathname;
         const newTitle = getPageTitle(pathname);
         setPageTitle(newTitle);
     }, [location]);
-
-    const { user } = useSelector(state => state.user)
-    console.log(user)
     const SidebarMenu = user?.isAdmin ? adminMenu : userMenu
     console.log(SidebarMenu)
     const handleLogout = () => {
@@ -82,7 +81,11 @@ const Layout = ({ children }) => {
                     <div className='header'>
                         <h1 className='textcenter'>{pageTitle}</h1>
                         <div className='header-content'>
-                            <i className="fa-solid fa-bell custom-icon"></i>
+
+                            <Badge count={user && user?.notification.length}>
+                                <i className="fa-solid fa-bell"></i>
+                            </Badge>
+
                             <Link to='/profile'>{user?.name}</Link>
                         </div>
                     </div>

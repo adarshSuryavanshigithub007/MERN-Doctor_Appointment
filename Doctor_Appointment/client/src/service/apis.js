@@ -25,7 +25,7 @@ export const getLogin = async (data) => {
 
 export const getUserData = async (token) => {
     try {
-        
+
         const response = await axios.post(`${url}/getUserData`, {}, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -35,6 +35,22 @@ export const getUserData = async (token) => {
         return response.data;
     } catch (error) {
         console.log(message.error)
+        message.error(`something went wrong`)
+    }
+}
+
+export const applyDoctor = async ({ data, userid, token }) => {
+    console.log(data, userid, token)
+    try {
+        const response = await axios.post(`${url}/apply-doctor`, { ...data, userid }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        console.log(response.data);
+        return response;
+    } catch (error) {
+        console.log(error)
         message.error(`something went wrong`)
     }
 }
