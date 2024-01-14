@@ -3,6 +3,7 @@ const userModel = require("../model/userModel")
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const doctorModel = require("../model/doctorModel")
+const bodyParser = require('body-parser')
 
 const registerController = async (req, resp) => {
     try {
@@ -68,7 +69,6 @@ const authController = async (req, res) => {
 }
 
 const applyDoctorController = async (req, res) => {
-
     try {
         const newDoctor = await doctorModel({ ...req.body, status: 'pending' })
         await newDoctor.save()
@@ -79,7 +79,7 @@ const applyDoctorController = async (req, res) => {
             message: `${newDoctor.firstName} ${newDoctor.lastName} Has Applied For Doctor Account`,
             data: {
                 doctorId: newDoctor._id,
-                name: newDoctor.firstName + "" + newDoctor.lastName,
+                name: newDoctor.firstName + " " + newDoctor.lastName,
                 onClickPath: '/admin/doctors'
             }
         })
@@ -87,9 +87,7 @@ const applyDoctorController = async (req, res) => {
         res.status(201).send({
             success: true,
             message: 'Doctor Account Applied Successfully'
-
         })
-
     } catch (error) {
         console.log(error)
         res.status(500).send({
@@ -98,8 +96,60 @@ const applyDoctorController = async (req, res) => {
             error
         })
     }
-
-
-
 }
-module.exports = { loginController, registerController, authController, applyDoctorController }
+
+const getAllNotificationController = async (req, res) => {
+    try {
+        const user = await userModel.findById({ _id: req.body.userId })
+        const seennotification = user.seennotification
+        const notification = user.notification
+        seennotification.push(...notification)
+        user.notification = []
+        user.seennotification = notification
+        const updatedUser = await user.save()
+        res.status(201).send({
+            success: true,
+            message: 'All message seen',
+            data: updatedUser
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({
+            message: ' Error While notification',
+            success: false,
+            error
+        })
+    }
+}
+
+
+const deleteAllNotificationController = async (req,res) => {
+
+    try {
+        const user = await userModel.findOne({ _id: req.body.userId })
+        user.seennotification = []
+        user.notification = []
+        const updatedUser = await user.save()
+        updatedUser.password = undefined
+        res.status(201).send({
+            success: true,
+            message: 'All message Deleted',
+            data: updatedUser
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({
+            message: ' Error While notification',
+            success: false,
+            error
+        })
+    }
+}
+module.exports = {
+    loginController,
+    registerController,
+    authController,
+    applyDoctorController,
+    getAllNotificationController,
+    deleteAllNotificationController
+}
