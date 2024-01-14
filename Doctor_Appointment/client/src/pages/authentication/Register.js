@@ -1,11 +1,10 @@
 import React from 'react'
 import { Form, Input, message } from 'antd';
-import '../style/RegisterStyles.css'
-import axios from 'axios'
+import './style/RegisterStyles.css'
 import { Link } from 'react-router-dom'
-import { getRegister } from '../service/apis';
 import {useDispatch} from 'react-redux'
-import { showLoading,hideLoading } from '../redux/feature/alertSlice';
+import { getRegister } from '../../service/apis';
+import { hideLoading, showLoading } from '../../redux/feature/alertSlice';
 const Register = () => {
   const dispatch = useDispatch()
   const onFinishHandler = async (values) => {

@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { doctor } from '../images/Images'
-import { Avatar, Badge, Button, message } from 'antd'
+import { Avatar, Badge, Button, Dropdown, Menu, message } from 'antd'
 import { adminMenu, userMenu } from './data'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 const Layout = ({ children }) => {
     const { user } = useSelector(state => state.user || {})
-    console.log(user?.notification.length)
     const [collapsed, setCollapsed] = useState(false);
     const location = useLocation()
     const navigate = useNavigate()
     const [pageTitle, setPageTitle] = useState('Doctor-Appointment')
+    console.log(user)
 
     useEffect(() => {
         // Update the page title whenever the location changes
@@ -19,20 +19,20 @@ const Layout = ({ children }) => {
         setPageTitle(newTitle);
     }, [location]);
     const SidebarMenu = user?.isAdmin ? adminMenu : userMenu
-    console.log(SidebarMenu)
     const handleLogout = () => {
         localStorage.clear()
         message.success('logout successful')
         navigate('/login')
-
     }
+
     function getPageTitle(pathname) {
         switch (pathname) {
             case '/':
                 return
             case '/apply-doctor':
-                return <h1 className='text-center'>Apply Doctor</h1>
-
+                return <h3 className='text-center'>Apply Doctor</h3>
+            case '/notificationpage':
+                return <h3 className='text-center'>Notification</h3>
             default:
                 return;
         }
@@ -79,13 +79,11 @@ const Layout = ({ children }) => {
                 </div>
                 <div className='content'>
                     <div className='header'>
-                        <h1 className='textcenter'>{pageTitle}</h1>
+                        <h3 className='textcenter'>{pageTitle}</h3>
                         <div className='header-content'>
-
-                            <Badge count={user && user?.notification.length}>
-                                <i className="fa-solid fa-bell"></i>
+                            <Badge count={user && user?.notification.length} size="small" style={{ marginRight: '20px' }}>
+                                <i className="fa-solid fa-bell" onClick={() => navigate('/notificationpage')} style={{ cursor: 'pointer' }}></i>
                             </Badge>
-
                             <Link to='/profile'>{user?.name}</Link>
                         </div>
                     </div>

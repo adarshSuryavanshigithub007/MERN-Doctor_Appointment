@@ -1,10 +1,10 @@
 import React from 'react'
 import { Form, Input, message } from 'antd';
-import '../style/RegisterStyles.css'
+import './style/RegisterStyles.css'
 import { Link, useNavigate } from 'react-router-dom'
-import { getLogin } from '../service/apis';
 import { useDispatch } from 'react-redux'
-import { showLoading, hideLoading } from '../redux/feature/alertSlice';
+import { hideLoading, showLoading } from '../../redux/feature/alertSlice';
+import { getLogin } from '../../service/apis';
 const Login = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
