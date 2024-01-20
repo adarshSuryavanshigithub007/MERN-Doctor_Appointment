@@ -3,7 +3,7 @@ import Layout from '../../layout/Layout'
 import { Avatar, Card, Tabs, message, notification } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
 import Meta from 'antd/es/card/Meta'
-import { deleteApplyDoctorNotification, getApplyDoctorNotification } from '../../service/apis'
+import { deleteApplyDoctorNotification, getApplyDoctorNotification } from '../../utils/service/apis'
 import { useNavigate } from 'react-router-dom'
 import { hideLoading, showLoading } from '../../redux/feature/alertSlice'
 

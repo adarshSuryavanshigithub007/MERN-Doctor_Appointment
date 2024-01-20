@@ -10,6 +10,7 @@ import ProtectedRoute from "./component/ProtectedRoute";
 import ApplyDoctor from "./pages/users/ApplyDoctor";
 import NotificationPage from "./pages/admin/NotificationPage";
 import Doctors from "./pages/admin/Doctors";
+import Users from "./pages/admin/Users";
 
 
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/apply-doctor" element={<ProtectedRoute><ApplyDoctor /></ProtectedRoute>} />
           <Route path="/notificationpage" element={<ProtectedRoute><NotificationPage /></ProtectedRoute>} />
           <Route path="/admin/doctors" element={<ProtectedRoute><Doctors /></ProtectedRoute>} />
+          <Route path="/admin/users" element={<ProtectedRoute><Users /></ProtectedRoute>} />
           <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
           <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
         </Routes>}

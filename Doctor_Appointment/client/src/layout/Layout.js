@@ -33,6 +33,10 @@ const Layout = ({ children }) => {
                 return <h3 className='text-center'>Apply Doctor</h3>
             case '/notificationpage':
                 return <h3 className='text-center'>Notification</h3>
+            case '/admin/doctors':
+                return <h3 className='text-center'>Doctors</h3>
+                case '/admin/users':
+                    return <h3 className='text-center'>Users</h3>
             default:
                 return;
         }

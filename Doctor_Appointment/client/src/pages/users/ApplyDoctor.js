@@ -1,7 +1,7 @@
 import React from 'react'
 import Layout from '../../layout/Layout'
-import { Button, Col, Form, Input, Row, TimePicker, message } from 'antd'
-import { applyDoctor } from '../../service/apis'
+import { Col, Form, Input, Row, TimePicker, message } from 'antd'
+import { applyDoctor } from '../../utils/service/apis'
 import { useDispatch, useSelector } from 'react-redux'
 import { hideLoading, showLoading } from '../../redux/feature/alertSlice'
 

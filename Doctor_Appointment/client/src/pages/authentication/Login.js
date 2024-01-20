@@ -4,7 +4,7 @@ import './style/RegisterStyles.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { hideLoading, showLoading } from '../../redux/feature/alertSlice';
-import { getLogin } from '../../service/apis';
+import { getLogin } from '../../utils/service/apis';
 const Login = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()

@@ -1,11 +1,10 @@
 import { message } from "antd"
 import axios from "axios"
+import { USER_URL } from "../API_URLS"
 
-const url = 'http://localhost:8080/api/v1/user'
 export const getRegister = async (data) => {
     try {
-
-        const response = await axios.post(`${url}/register`, data)
+        const response = await axios.post(`${USER_URL}/register`, data)
         return response
     } catch (error) {
         console.log(message.error)
@@ -15,7 +14,7 @@ export const getRegister = async (data) => {
 
 export const getLogin = async (data) => {
     try {
-        const response = await axios.post(`${url}/login`, data)
+        const response = await axios.post(`${USER_URL}/login`, data)
         return response
     } catch (error) {
         console.log(message.error)
@@ -26,7 +25,7 @@ export const getLogin = async (data) => {
 export const getUserData = async (token) => {
     try {
 
-        const response = await axios.post(`${url}/getUserData`, {}, {
+        const response = await axios.post(`${USER_URL}/getUserData`, {}, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -42,7 +41,7 @@ export const getUserData = async (token) => {
 export const applyDoctor = async ({ data, userid, token }) => {
     console.log(data, userid, token)
     try {
-        const response = await axios.post(`${url}/apply-doctor`, { ...data, userid }, {
+        const response = await axios.post(`${USER_URL}/apply-doctor`, { ...data, userid }, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -58,7 +57,7 @@ export const applyDoctor = async ({ data, userid, token }) => {
 
 export const getApplyDoctorNotification = async({userId,token})=>{
     try {
-        const response = await axios.post(`${url}/get-all-notification`,userId,{
+        const response = await axios.post(`${USER_URL}/get-all-notification`,userId,{
             headers:{
                 Authorization: `Bearer ${token}`
             }
@@ -74,7 +73,7 @@ export const getApplyDoctorNotification = async({userId,token})=>{
 export const deleteApplyDoctorNotification = async({userId,token})=>{
     console.log(userId)
     try {
-        const response = await axios.post(`${url}/delete-all-notification`,userId,{
+        const response = await axios.post(`${USER_URL}/delete-all-notification`,userId,{
             headers:{
                 Authorization: `Bearer ${token}`
             }

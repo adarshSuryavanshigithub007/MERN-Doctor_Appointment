@@ -1,5 +1,5 @@
 const express = require('express')
-const { loginController, registerController, authController, applyDoctorController, notificationController, getAllNotificationController, deleteAllNotificationController } = require('../controller/userCtrl')
+const { loginController, registerController, authController, applyDoctorController, getAllNotificationController, deleteAllNotificationController } = require('../controller/userCtrl')
 const authMiddleware = require('../middlewares/authMiddleware')
 
 // router object

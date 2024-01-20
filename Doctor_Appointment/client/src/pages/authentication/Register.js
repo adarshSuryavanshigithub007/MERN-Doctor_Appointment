@@ -3,7 +3,7 @@ import { Form, Input, message } from 'antd';
 import './style/RegisterStyles.css'
 import { Link } from 'react-router-dom'
 import {useDispatch} from 'react-redux'
-import { getRegister } from '../../service/apis';
+import { getRegister } from '../../utils/service/apis'
 import { hideLoading, showLoading } from '../../redux/feature/alertSlice';
 const Register = () => {
   const dispatch = useDispatch()

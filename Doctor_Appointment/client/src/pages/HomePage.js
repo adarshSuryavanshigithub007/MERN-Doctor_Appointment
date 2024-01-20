@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { getUserData } from '../service/apis'
+import { getUserData } from '../utils/service/apis'
 import Layout from '../layout/Layout'
 const HomePage = () => {
     

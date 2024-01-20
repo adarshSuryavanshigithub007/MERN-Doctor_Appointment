@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react'
+
 import { useDispatch, useSelector } from 'react-redux'
-import { Navigate, useNavigate } from 'react-router-dom'
-import { hideLoading, showLoading } from '../redux/feature/alertSlice'
-import axios from 'axios'
-import { getUserData } from '../service/apis'
+import {  useNavigate } from 'react-router-dom'
+import { getUserData } from '../utils/service/apis'
 import { setUser } from '../redux/feature/userSlice'
+import { useEffect } from 'react'
 
 export default function ProtectedRoute({ children }) {
     const dispatch = useDispatch()
