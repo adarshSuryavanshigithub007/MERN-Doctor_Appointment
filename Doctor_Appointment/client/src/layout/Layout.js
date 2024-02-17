@@ -35,8 +35,8 @@ const Layout = ({ children }) => {
                 return <h3 className='text-center'>Notification</h3>
             case '/admin/doctors':
                 return <h3 className='text-center'>Doctors</h3>
-                case '/admin/users':
-                    return <h3 className='text-center'>Users</h3>
+            case '/admin/users':
+                return <h3 className='text-center'>Users</h3>
             default:
                 return;
         }
@@ -47,22 +47,7 @@ const Layout = ({ children }) => {
         <div className={`main ${collapsed ? 'collapsed' : ''}`}>
             <div className='layout'>
                 <div className='sidebar'>
-                    <div className='sidebar-logo'>
-                        <Button
-                            type="text"
-                            icon={collapsed ? <i class="fa-solid fa-bars"></i> : <i class="fa-solid fa-bars"></i>}
-                            onClick={() => setCollapsed(!collapsed)}
-                            style={{
-                                color: '#fff',
-                                fontSize: '26px',
-                                width: 30,
-                                height: 30,
-                            }}
-                        />
-                        <div className='logo'>
-                            <Avatar size={55} src={doctor} />
-                        </div>
-                    </div>
+
                     <div className='menu'>
                         {SidebarMenu.map(menu => {
                             const isActive = location.pathname === menu.path

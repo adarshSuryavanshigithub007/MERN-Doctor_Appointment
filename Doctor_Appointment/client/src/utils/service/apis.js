@@ -1,6 +1,6 @@
 import { message } from "antd"
 import axios from "axios"
-import { USER_URL } from "../API_URLS"
+import { ADMIN_URL, USER_URL } from "../API_URLS"
 
 export const getRegister = async (data) => {
     try {
@@ -55,10 +55,10 @@ export const applyDoctor = async ({ data, userid, token }) => {
 }
 
 
-export const getApplyDoctorNotification = async({userId,token})=>{
+export const getApplyDoctorNotification = async ({ userId, token }) => {
     try {
-        const response = await axios.post(`${USER_URL}/get-all-notification`,userId,{
-            headers:{
+        const response = await axios.post(`${USER_URL}/get-all-notification`, userId, {
+            headers: {
                 Authorization: `Bearer ${token}`
             }
         })
@@ -70,17 +70,34 @@ export const getApplyDoctorNotification = async({userId,token})=>{
 }
 
 
-export const deleteApplyDoctorNotification = async({userId,token})=>{
+export const deleteApplyDoctorNotification = async ({ userId, token }) => {
     console.log(userId)
     try {
-        const response = await axios.post(`${USER_URL}/delete-all-notification`,userId,{
-            headers:{
+        const response = await axios.post(`${USER_URL}/delete-all-notification`, userId, {
+            headers: {
                 Authorization: `Bearer ${token}`
             }
         })
         return response.data
     } catch (error) {
         console.log(error)
+        message.error(`something went wrong`)
+    }
+}
+
+export const getAllUser = async (token) => {
+    console.log(token)
+    try {
+        const response = await axios.get(`${ADMIN_URL}/getAllUsers`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        console.log(response)
+        return response;
+
+    } catch (error) {
+        console.log(message.error)
         message.error(`something went wrong`)
     }
 }
