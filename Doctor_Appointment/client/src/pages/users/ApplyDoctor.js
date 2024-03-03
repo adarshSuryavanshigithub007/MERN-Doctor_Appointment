@@ -31,7 +31,6 @@ const ApplyDoctor = () => {
     
     return (
         <Layout>
-
             <div style={{ padding: '0px 20px', marginTop: '30px' }}>
                 <Form name="basic" layout="vertical" onFinish={handleFinish}>
                     <h3 className='text-left'>Personal Details:</h3>
@@ -90,13 +89,10 @@ const ApplyDoctor = () => {
                             </Form.Item>
                         </Col>
                     </Row>
-
                     <Col xs={24} md={24} lg={8}>
                         <button className='btn btn-primary form-btn' type='submit'>SUBMIT</button>
                     </Col>
-
                 </Form>
-
             </div>
         </Layout>
     )

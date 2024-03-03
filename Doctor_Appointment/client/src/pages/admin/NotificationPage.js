@@ -14,18 +14,18 @@ const NotificationPage = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const token = localStorage.getItem('token')
-    let getInitials = function (string) {
-        // Remove leading and trailing spaces using trim()
-        string = string.trim();
-        console.log(string, string.split(' '))
-        let names = string.split(' '),
-            initials = names[0].substring(0, 1).toUpperCase();
-        console.log(initials)
-        if (names.length > 1) {
-            initials += names[names.length - 1].substring(0, 1).toUpperCase();
-        }
-        return initials
-    };
+    // let getInitials = function (string) {
+    //     // Remove leading and trailing spaces using trim()
+    //     string = string.trim();
+    //     console.log(string, string.split(' '))
+    //     let names = string.split(' '),
+    //         initials = names[0].substring(0, 1).toUpperCase();
+    //     console.log(initials)
+    //     if (names.length > 1) {
+    //         initials += names[names.length - 1].substring(0, 1).toUpperCase();
+    //     }
+    //     return initials
+    // };
     const handleMarkAllRead = () => {
         try {
             dispatch(showLoading())
@@ -69,13 +69,15 @@ const NotificationPage = () => {
                     </div>
                     {
                         user?.notification.map(item => (
-                            <Card style={{ width: 500, marginTop: 16, }} >
-                                <Meta avatar={<Avatar size='small'>{getInitials(item.data.name)}</Avatar>}
-                                    title={item.message}
-                                    description={item.type}
-                                    onClick={() => navigate(item.onClickPath)}
-                                    style={{ cursor: 'pointer' }} />
-                            </Card>
+                            <Card style={{ width: 500, marginTop: 16 }}>
+                            <Meta
+                                title={item.message}
+                                description={item.type}
+                                onClick={() => navigate(item.onClickPath)}
+                                style={{ cursor: 'pointer' }}
+                            />
+                        </Card>
+                        
                         ))
                     }
                 </Tabs.TabPane>
@@ -85,13 +87,14 @@ const NotificationPage = () => {
                     </div>
                     {
                         user?.seennotification.map(item => (
-                            <Card style={{ width: 500, marginTop: 16, }} >
-                                <Meta avatar={<Avatar size='small'>{getInitials(item.data.name)}</Avatar>}
-                                    title={item.message}
-                                    description={item.type}
-                                    onClick={() => navigate(item.onClickPath)}
-                                    style={{ cursor: 'pointer' }} />
-                            </Card>
+                            <Card style={{ width: 500, marginTop: 16 }}>
+                            <Meta
+                                title={item.message}
+                                description={item.type}
+                                onClick={() => navigate(item.onClickPath)}
+                                style={{ cursor: 'pointer' }}
+                            />
+                        </Card>
                         ))
                     }
                 </Tabs.TabPane>

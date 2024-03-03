@@ -24,7 +24,6 @@ export const getLogin = async (data) => {
 
 export const getUserData = async (token) => {
     try {
-
         const response = await axios.post(`${USER_URL}/getUserData`, {}, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -54,7 +53,6 @@ export const applyDoctor = async ({ data, userid, token }) => {
     }
 }
 
-
 export const getApplyDoctorNotification = async ({ userId, token }) => {
     try {
         const response = await axios.post(`${USER_URL}/get-all-notification`, userId, {
@@ -68,7 +66,6 @@ export const getApplyDoctorNotification = async ({ userId, token }) => {
         message.error(`something went wrong`)
     }
 }
-
 
 export const deleteApplyDoctorNotification = async ({ userId, token }) => {
     console.log(userId)
@@ -86,7 +83,6 @@ export const deleteApplyDoctorNotification = async ({ userId, token }) => {
 }
 
 export const getAllUser = async (token) => {
-    console.log(token)
     try {
         const response = await axios.get(`${ADMIN_URL}/getAllUsers`, {
             headers: {
@@ -96,6 +92,36 @@ export const getAllUser = async (token) => {
         console.log(response)
         return response;
 
+    } catch (error) {
+        console.log(message.error)
+        message.error(`something went wrong`)
+    }
+}
+
+export const getAllDoctors = async (token) => {
+    try {
+        const response = await axios.get(`${ADMIN_URL}/getAllDoctors`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response;
+    } catch (error) {
+        console.log(message.error)
+        message.error(`something went wrong`)
+    }
+}
+
+export const getStatusChange = async  ( {record,status, token}) => {
+    console.log(record,status)
+    try {
+        const response = await axios.post(`${ADMIN_URL}/changeAccountStatus`,{ doctorId:record._id, userId:record.userId, status:status},{
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        console.log(response)
+        return response;
     } catch (error) {
         console.log(message.error)
         message.error(`something went wrong`)

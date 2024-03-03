@@ -54,7 +54,6 @@ const Users = () => {
             )
         }
     ]
-
     return (
         <Layout>
             <Table columns={columns} dataSource={users} size="small" />

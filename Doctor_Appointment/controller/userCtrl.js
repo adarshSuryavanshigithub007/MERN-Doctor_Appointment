@@ -100,7 +100,7 @@ const applyDoctorController = async (req, res) => {
 
 const getAllNotificationController = async (req, res) => {
     try {
-        const user = await userModel.findById({ _id: req.body.userId })
+        const user = await userModel.findById({ _id:req.body.userId })
         const seennotification = user.seennotification
         const notification = user.notification
         seennotification.push(...notification)
