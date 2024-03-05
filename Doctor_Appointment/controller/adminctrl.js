@@ -43,33 +43,46 @@ const getAllDoctorController = async (req, res) => {
 const changeAccountStatusController = async (req, res) => {
     try {
         const { doctorId, status } = req.body
-        const docotor = await doctorModel.findByIdAndUpdate(doctorId, (status))
-        console.log(docotor)
+        const doctor = await doctorModel.findByIdAndUpdate(doctorId, { status }, { new: true }) // Corrected the update parameter
+        console.log(doctor)
 
-        const user = await userModel.findOne({ _id: docotor.userId })
-        console.log(docotor)
+        if (!doctor) {
+            return res.status(404).send({
+                message: 'Doctor not found',
+                success: false
+            });
+        }
+        const user = await userModel.findOne({ _id: doctor.userId })
+        console.log(user)
+        if (!user) {
+            return res.status(404).send({
+                message: 'User not found',
+                success: false
+            });
+        }
         const notification = user.notification
-
         notification.push({
-            type: 'docotor-account-request-updated',
+            type: 'doctor-account-request-updated', // Corrected spelling
             message: `Your Request Accepted ${status}`,
         })
-        user.isDoctor === 'approved' ? true : false
+
+        user.isDoctor = status === 'approved' // Updated isDoctor based on status
         await user.save()
+
         res.status(200).send({
-            message: 'Docotor Approve Successfully',
+            message: 'Doctor Approved Successfully',
             success: true,
-            data: docotor
+            data: doctor // Return the updated doctor document
         })
     } catch (error) {
         console.log(error)
         res.status(500).send({
-            message: 'Error While doctors ',
+            message: 'Error While updating doctor status',
             success: false,
-            error
+            error: error.message // Return error message for debugging
         })
     }
-
 }
+
 
 module.exports = { getAllUsersController, getAllDoctorController, changeAccountStatusController }

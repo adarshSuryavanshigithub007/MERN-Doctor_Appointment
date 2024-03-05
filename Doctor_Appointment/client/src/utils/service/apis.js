@@ -112,8 +112,8 @@ export const getAllDoctors = async (token) => {
     }
 }
 
-export const getStatusChange = async  ( {record,status, token}) => {
-    console.log(record,status)
+export const getStatusChange = async  ( {record,token,status}) => {
+    console.log(record)
     try {
         const response = await axios.post(`${ADMIN_URL}/changeAccountStatus`,{ doctorId:record._id, userId:record.userId, status:status},{
             headers: {

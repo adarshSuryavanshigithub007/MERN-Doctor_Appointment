@@ -8,11 +8,18 @@ const Doctors = () => {
   console.log(doctors)
   const token = localStorage.getItem('token')
 
-  const handleChangeStatus = async(record,status) => {
+  const handleChangeStatus = async (record,status) => {
     console.log(record)
-    const resp = await getStatusChange({record, status,token})
+    const resp = await getStatusChange({ record, token,status })
     if (resp.data.success) {
-     message.success(resp.data.message )
+      if(status==="approved"){
+        message.success(resp.data.message)
+        getDoctors();
+      }else{
+        message.success("unApproved Successfully")
+        getDoctors();
+      }
+     
     }
     console.log(resp)
   }
@@ -20,7 +27,7 @@ const Doctors = () => {
   const getDoctors = async () => {
     try {
       const response = await getAllDoctors(token)
-      console.log(response) 
+      console.log(response)
       if (response.data.success) {
         setDoctors(response.data.data)
       }
@@ -31,7 +38,7 @@ const Doctors = () => {
 
   useEffect(() => {
     getDoctors()
-  }, [])
+  }, [doctors.status])
   const columns = [
     {
       title: "First Name",
@@ -56,7 +63,7 @@ const Doctors = () => {
     {
       title: "Timings",
       dataIndex: "timings"
-    },  
+    },
     {
       title: "Status",
       dataIndex: "status",
@@ -74,7 +81,7 @@ const Doctors = () => {
       dataIndex: "action",
       render: (text, record) => (
         <div className='d-flex'>
-        {record.status === "pending" ? <button className='btn btn-success' onClick={()=>handleChangeStatus(record,"approved")}>Approve</button> :<button className='btn btn-danger'>unApprove</button>}  
+          {record.status === "pending" ? <button className='btn btn-success' onClick={() => handleChangeStatus(record, "approved")}>Approve</button> : <button className='btn btn-danger' onClick={() => handleChangeStatus(record, "pending")}>unApprove</button>}
         </div>
       )
     }
