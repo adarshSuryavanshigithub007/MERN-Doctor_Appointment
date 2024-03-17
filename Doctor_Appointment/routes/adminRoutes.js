@@ -2,8 +2,6 @@ const express = require('express')
 const authMiddleware = require('../middlewares/authMiddleware')
 const { getAllUsersController, getAllDoctorController, changeAccountStatusController } = require('../controller/adminctrl')
 
-
-
 // router object
 const router = express.Router()
 

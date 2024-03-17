@@ -18,7 +18,26 @@ const Layout = ({ children }) => {
         const newTitle = getPageTitle(pathname);
         setPageTitle(newTitle);
     }, [location]);
-    const SidebarMenu = user?.isAdmin ? adminMenu : userMenu
+    const doctorMenu = [
+        {
+            name: 'Home',
+            path: '/',
+            icon: 'fa-solid fa-house'
+        },
+        {
+            name: 'Appointments',
+            path: '/appointment',
+            icon: 'fa-solid fa-calendar-check'
+        },
+        {
+            name: 'Profile',
+            path: `/doctor/Profile/${user?._id}`,
+            icon: 'fa-solid fa-user'
+        },
+    
+    ]
+    
+    const SidebarMenu = user?.isAdmin ? adminMenu : user?.isDoctor ? doctorMenu : userMenu 
     const handleLogout = () => {
         localStorage.clear()
         message.success('logout successful')
@@ -37,6 +56,8 @@ const Layout = ({ children }) => {
                 return <h3 className='text-center'>Doctors</h3>
             case '/admin/users':
                 return <h3 className='text-center'>Users</h3>
+            case `/doctor/Profile/${user?._id}`:
+                return <h3 className='text-center'>{`Dr.Profile`}</h3>
             default:
                 return;
         }

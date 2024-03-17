@@ -19,7 +19,6 @@ const Doctors = () => {
         message.success("unApproved Successfully")
         getDoctors();
       }
-     
     }
     console.log(resp)
   }

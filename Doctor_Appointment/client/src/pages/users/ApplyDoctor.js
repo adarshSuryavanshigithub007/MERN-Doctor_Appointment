@@ -4,7 +4,7 @@ import { Col, Form, Input, Row, TimePicker, message } from 'antd'
 import { applyDoctor } from '../../utils/service/apis'
 import { useDispatch, useSelector } from 'react-redux'
 import { hideLoading, showLoading } from '../../redux/feature/alertSlice'
-
+import moment from 'moment'
 const ApplyDoctor = () => {
     const { user } = useSelector(state => state.user || {})
     console.log(user)
@@ -14,7 +14,7 @@ const ApplyDoctor = () => {
         console.log(values);
         try {
             dispatch(showLoading())
-            const res = await applyDoctor({ data: values, userid: user._id, token });
+            const res = await applyDoctor({ data: values, userid: user._id, token, timings: values.timings });
             dispatch(hideLoading())
             if(res.data.success){
                 message.success(res.data.message)
@@ -32,7 +32,7 @@ const ApplyDoctor = () => {
     return (
         <Layout>
             <div style={{ padding: '0px 20px', marginTop: '30px' }}>
-                <Form name="basic" layout="vertical" onFinish={handleFinish}>
+                <Form name="basic" layout="vertical" onFinish={handleFinish} >
                     <h3 className='text-left'>Personal Details:</h3>
                     <Row gutter={30}>
                         <Col xs={24} md={24} lg={8}>
@@ -56,8 +56,8 @@ const ApplyDoctor = () => {
                             </Form.Item>
                         </Col>
                         <Col xs={24} md={24} lg={8}>
-                            <Form.Item label="website" name="website" >
-                                <Input type='text' placeholder='Enter Your Website' />
+                            <Form.Item label="website" name="website" rules={[{ required: true, message: 'Please input your Website!', },]} >
+                                <Input type='text' placeholder='Enter Your Website' required/>
                             </Form.Item>
                         </Col>
                         <Col xs={24} md={24} lg={8}>
