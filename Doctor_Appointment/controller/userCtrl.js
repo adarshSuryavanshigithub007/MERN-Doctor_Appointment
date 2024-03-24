@@ -145,11 +145,34 @@ const deleteAllNotificationController = async (req,res) => {
         })
     }
 }
+
+const getAllDoctorsController = async(req,res)=>{
+
+    try {
+
+        const doctors = await  doctorModel.find({status:'approved'})
+        res.status(201).send({
+            success:true,
+            message: 'Get All Doctors',
+            data:doctors
+        })
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({
+            message: ' Error While notification',
+            success: false,
+            error
+        })
+    }
+
+}
 module.exports = {
     loginController,
     registerController,
     authController,
     applyDoctorController,
     getAllNotificationController,
-    deleteAllNotificationController
+    deleteAllNotificationController,
+    getAllDoctorsController
 }

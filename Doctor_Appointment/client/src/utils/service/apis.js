@@ -112,10 +112,10 @@ export const getAllDoctors = async (token) => {
     }
 }
 
-export const getStatusChange = async  ( {record,token,status}) => {
+export const getStatusChange = async ({ record, token, status }) => {
     console.log(record)
     try {
-        const response = await axios.post(`${ADMIN_URL}/changeAccountStatus`,{ doctorId:record._id, userId:record.userId, status:status},{
+        const response = await axios.post(`${ADMIN_URL}/changeAccountStatus`, { doctorId: record._id, userId: record.userId, status: status }, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -128,10 +128,10 @@ export const getStatusChange = async  ( {record,token,status}) => {
     }
 }
 
-export const getDoctorInfo = async ({ userId, token })=>{
-console.log(userId,token)
+export const getDoctorInfo = async ({ userId, token }) => {
+    console.log(userId, token)
     try {
-        const response = await axios.post(`${DOCTOR_PROFILE_URL}/getDoctorInfo`, { userId:userId}, {
+        const response = await axios.post(`${DOCTOR_PROFILE_URL}/getDoctorInfo`, { userId: userId }, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -145,19 +145,34 @@ console.log(userId,token)
 
 }
 
-export const getUpdateProfile = async ({data, userId, timings, token })=>{
-    console.log(data,userId,token)
-        try {
-            const response = await axios.post(`${DOCTOR_PROFILE_URL}/updateProfile`,  { ...data, userId:userId }, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
-            console.log(response.data)
-            return response
-        } catch (error) {
-            console.log(error)
-            message.error(`something went wrong`)
-        }
-    
+export const getUpdateProfile = async ({ data, userId, timings, token }) => {
+    console.log(data, userId, token)
+    try {
+        const response = await axios.post(`${DOCTOR_PROFILE_URL}/updateProfile`, { ...data, userId: userId }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        console.log(response.data)
+        return response
+    } catch (error) {
+        console.log(error)
+        message.error(`something went wrong`)
     }
+
+}
+
+export const getAllDoctorsList = async (token) => {
+    try {
+        const response = await axios.get(`${USER_URL}/getAllDoctors`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        console.log(response.data)
+        return response;
+    } catch (error) {
+        console.log(error)
+        message.error(`something went wrong`)
+    }
+}
